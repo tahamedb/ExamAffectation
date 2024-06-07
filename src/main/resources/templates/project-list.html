@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Project List</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Budget</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${projects}">
+            <td th:text="${project.id}"></td>
+            <td th:text="${project.name}"></td>
+            <td th:text="${project.budget}"></td>
+            <td>
+                <a th:href="@{/projects/{id}(id=${project.id})}" class="btn btn-primary">View</a>
+                <a th:href="@{/projects/{id}/assign(id=${project.id})}" class="btn btn-secondary">Assign Employee</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
