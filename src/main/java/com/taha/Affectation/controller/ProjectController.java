@@ -23,13 +23,18 @@ public class ProjectController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String listProjects(Model model) {
-        List<Project> projects = projectService.getAllProjects();
-        model.addAttribute("projects", projects);
-        return "project-list";
+        try {
+            List<Project> projects = projectService.getAllProjects();
+            model.addAttribute("projects", projects);
+            return "project-list";
+        } catch (Exception e) {
+            System.err.println("Error occurred while fetching projects: " + e.getMessage());
+            e.printStackTrace();
+            return "error";
+        }
     }
-
     @GetMapping("/{id}")
     public String viewProject(@PathVariable Long id, Model model) {
         Project project = projectService.getProjectById(id);
@@ -50,5 +55,11 @@ public class ProjectController {
     public String assignEmployee(@PathVariable Long id, @RequestParam Long employeeId, @RequestParam Double implication) {
         projectService.assignEmployeeToProject(id, employeeId, implication);
         return "redirect:/projects/" + id;
+    }
+    @GetMapping("empl")
+    public String listEmployees(Model model) {
+        List<Employee> employees = employeeService.getAllEmployees();
+        model.addAttribute("employees", employees);
+        return "employee-list";
     }
 }

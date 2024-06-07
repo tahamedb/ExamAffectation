@@ -52,7 +52,6 @@ public class SecurityConfig {
                 Map<String, Object> attributes = oauthToken.getPrincipal().getAttributes();
                 String email = (String) attributes.get("email");
 
-                // Assign roles based on specific email addresses
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 if (email.equals("sarahwhite30031003@gmail.com")) {
                     authorities.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
